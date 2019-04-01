@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="dmoransky.github.io/"/>
-  <updated>2019-04-01T13:42:30.150Z</updated>
+  <updated>2019-04-01T14:46:25.400Z</updated>
   <id>dmoransky.github.io/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LibreOj 10012. [一本通 1.2 例 2] Best Cow Fences</title>
+    <link href="dmoransky.github.io/posts/20520/"/>
+    <id>dmoransky.github.io/posts/20520/</id>
+    <published>2019-04-01T14:24:00.000Z</published>
+    <updated>2019-04-01T14:46:25.400Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="题目地址"><a href="#题目地址" class="headerlink" title="题目地址"></a><a href="https://loj.ac/problem/10012" target="_blank" rel="noopener">题目地址</a></h2><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>二分平均值，区间为<code>0~2000</code>。将每个<code>a[i]</code>减去平均值，就只用考虑字段和是否<code>&gt;=0</code>了。<br>关于计算子段和，可以使用前缀和表示，<code>sum[i]</code>表示前<code>i</code>个数的和。<br>由<code>L~n</code>以循环子段的尾巴，关于每次循环：</p><ul><li>维护一个子段开头的最小值</li><li>找到这个平均值中，最大的子段和<br><strong>注意：</strong>由于是<code>*1000</code>的<code>int</code>结果，自然是保留到5位小数（4+1进位），故二分判断为<code>r-l&gt;1e-5</code>。<pre class=" language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;cmath></span></span><span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span><span class="token keyword">double</span> sum<span class="token punctuation">[</span><span class="token number">100001</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token keyword">int</span> n<span class="token punctuation">,</span>L<span class="token punctuation">,</span>a<span class="token punctuation">[</span><span class="token number">100001</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>  <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d%d"</span><span class="token punctuation">,</span><span class="token operator">&amp;</span>n<span class="token punctuation">,</span><span class="token operator">&amp;</span>L<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>i<span class="token operator">&lt;=</span>n<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span>a<span class="token operator">+</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token keyword">double</span> l<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span>r<span class="token operator">=</span><span class="token number">2000</span><span class="token punctuation">,</span>eps<span class="token operator">=</span><span class="token number">1e-5</span><span class="token punctuation">;</span>  <span class="token keyword">while</span><span class="token punctuation">(</span>r<span class="token operator">-</span>l<span class="token operator">></span>eps<span class="token punctuation">)</span><span class="token punctuation">{</span>      <span class="token keyword">double</span> mid<span class="token operator">=</span><span class="token punctuation">(</span>l<span class="token operator">+</span>r<span class="token punctuation">)</span><span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">;</span>      <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>i<span class="token operator">&lt;=</span>n<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>sum<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">=</span>sum<span class="token punctuation">[</span>i<span class="token number">-1</span><span class="token punctuation">]</span><span class="token operator">+</span>a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">-</span>mid<span class="token punctuation">;</span>      <span class="token keyword">double</span> ans<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1e10</span><span class="token punctuation">,</span>min_v<span class="token operator">=</span><span class="token number">1e10</span><span class="token punctuation">;</span>      <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span>L<span class="token punctuation">;</span>i<span class="token operator">&lt;=</span>n<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>          min_v<span class="token operator">=</span><span class="token function">min</span><span class="token punctuation">(</span>min_v<span class="token punctuation">,</span>sum<span class="token punctuation">[</span>i<span class="token operator">-</span>L<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>          ans<span class="token operator">=</span><span class="token function">max</span><span class="token punctuation">(</span>ans<span class="token punctuation">,</span>sum<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">-</span>min_v<span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token punctuation">}</span>      <span class="token keyword">if</span><span class="token punctuation">(</span>ans<span class="token operator">>=</span><span class="token number">0</span><span class="token punctuation">)</span>l<span class="token operator">=</span>mid<span class="token punctuation">;</span>      <span class="token keyword">else</span> r<span class="token operator">=</span>mid<span class="token punctuation">;</span>  <span class="token punctuation">}</span>  <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span><span class="token keyword">int</span><span class="token punctuation">(</span>r<span class="token operator">*</span><span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span></code></pre></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;题目地址&quot;&gt;&lt;a href=&quot;#题目地址&quot; class=&quot;headerlink&quot; title=&quot;题目地址&quot;&gt;&lt;/a&gt;&lt;a href=&quot;https://loj.ac/problem/10012&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;题目地址
+      
+    
+    </summary>
+    
+      <category term="题解" scheme="dmoransky.github.io/categories/%E9%A2%98%E8%A7%A3/"/>
+    
+    
+      <category term="LibreOj" scheme="dmoransky.github.io/tags/LibreOj/"/>
+    
+      <category term="二分" scheme="dmoransky.github.io/tags/%E4%BA%8C%E5%88%86/"/>
+    
+      <category term="分治" scheme="dmoransky.github.io/tags/%E5%88%86%E6%B2%BB/"/>
+    
+      <category term="一本通" scheme="dmoransky.github.io/tags/%E4%B8%80%E6%9C%AC%E9%80%9A/"/>
+    
+  </entry>
   
   <entry>
     <title>[整理]Hexo 博客使用的插件</title>
