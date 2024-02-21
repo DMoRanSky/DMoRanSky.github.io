@@ -1,6 +1,8 @@
 ---
 cms_exclude: true
 
+title: MoRanSky 
+
 # To publish author profile pages, remove all of the `_build` and `cascade` settings below.
 _build:
   render: never
