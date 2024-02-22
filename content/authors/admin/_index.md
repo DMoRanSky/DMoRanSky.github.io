@@ -47,16 +47,16 @@ education:
 skills:
   - name: Technical
     items:
-      - name: CP
-        description: ''
-        percent: 80
-        icon: python
-        icon_pack: fab
-      - name: Data Science
-        description: ''
-        percent: 100
-        icon: chart-line
-        icon_pack: fas
+      # - name: Competitive Programming
+      #   description: ''
+      #   percent: 1
+      #   icon: python
+      #   icon_pack: fab
+      # - name: Data Science
+      #   description: ''
+      #   percent: 100
+      #   icon: chart-line
+      #   icon_pack: fas
 
   - name: Hobbies
     color: '#eeac02'
