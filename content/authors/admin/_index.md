@@ -33,13 +33,14 @@ interests:
   - Database System
   - ML Theory
   - Computer Vision
+  - Quant Alpha Research
 
 # Education to show in About widget
-education:
-  courses:
-    - course: Undergraduate in Computing and AI 
-      institution: PolyU
-      year: 2023
+# education:
+#   courses:
+#     - course: Undergraduate in Computing and AI 
+#       institution: PolyU
+#       year: 2023
    
 
 # Skills
