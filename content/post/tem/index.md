@@ -1,8 +1,5 @@
 ---
 title: CP Template
-features:
-  math:
-    enable: true
 ---
 # Default
 
