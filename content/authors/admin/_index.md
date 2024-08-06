@@ -28,12 +28,7 @@ organizations:
 bio: Experience and record the world.
 
 # Interests to show in About widget
-interests:
-  - TCS
-  - Database System
-  - ML Theory
-  - Computer Vision
-  - Quant Alpha Research
+#interests:
 
 # Education to show in About widget
 # education:
